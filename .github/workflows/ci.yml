@@ -1,0 +1,21 @@
+name: Make Mesa-D3D12
+on: 
+  push:
+  workflow_dispatch:
+
+jobs:
+  makepkg:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: docker://archlinux:base-devel
+        with:
+          entrypoint: /bin/bash
+          args: /github/workspace/entrypoint.sh
+
+      - uses: actions/upload-artifact@v2
+        with:
+          path: |
+            directx-headers/*.pkg.tar.zst
+            mesa-d3d12/*.pkg.tar.zst
