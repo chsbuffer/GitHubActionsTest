@@ -4,7 +4,8 @@ title: "[BUG] <title>"
 labels: [Bug, Needs Triage]
 body:
 - type: markdown
-  value: "a"
+  attributes:
+    value: "WTF"
 
 - type: checkboxes
   attributes:
