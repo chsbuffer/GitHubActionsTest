@@ -3,6 +3,9 @@ description: File a bug/issue
 title: "[BUG] <title>"
 labels: [Bug, Needs Triage]
 body:
+- type: markdown
+  value: a
+
 - type: checkboxes
   attributes:
     label: Is there an existing issue for this?
