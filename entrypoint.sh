@@ -15,6 +15,7 @@ su --login build --command="\
  export MAKEFLAGS=-j$(nproc) &&\
  git clone --branch packages/mesa --depth 1 https://github.com/archlinux/svntogit-packages.git mesa &&\
  cd mesa/trunk &&\
+ sed -i \'s/pkgver=.*/pkgver=22.1.0/\' PKGBUILD
  makepkg --syncdeps --noconfirm --skipinteg &&\
  cd .. ;\
 "
