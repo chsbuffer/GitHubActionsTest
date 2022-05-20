@@ -7,7 +7,8 @@ pacman --sync --refresh --sysupgrade --noconfirm sudo git
 
 useradd --create-home build --groups wheel
 chown --recursive build /github/workspace /github/home
-# echo "build ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+# makepkg --syncdeps calls sudo 
+echo "build ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 su --login build --command="\
  id ;\
