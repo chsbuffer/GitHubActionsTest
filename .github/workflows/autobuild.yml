@@ -15,10 +15,10 @@ jobs:
       - name: Install build tool chain
         run: sudo apt update && sudo apt install build-essential flex bison libssl-dev libelf-dev dwarves -y
 
-      # - name: Enable flags
-      #   run: |
-      #     cp Microsoft/config-wsl .config
-      #     echo CONFIG_EROFS_FS=y >> .config
+      - name: Tweak Config
+        run: |
+          cp Microsoft/config-wsl .config
+#          echo CONFIG_EROFS_FS=y >> .config
 
       - name: Build linux kernel
         run: make
