@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Fetch latest wsl kernel source
-        run: git clone https://github.com/microsoft/WSL2-Linux-Kernel -b linux-msft-wsl-6.1.y --depth 1 .
+        run: git clone https://github.com/microsoft/WSL2-Linux-Kernel -b linux-msft-wsl-5.15.y --depth 1 .
 
       - name: Install build tool chain
         run: sudo apt update && sudo apt install build-essential flex bison libssl-dev libelf-dev dwarves -y
@@ -18,7 +18,11 @@ jobs:
       - name: Tweak Config
         run: |
           cp Microsoft/config-wsl .config
-#          echo CONFIG_EROFS_FS=y >> .config
+          echo CONFIG_STAGING=y >> .config
+          echo CONFIG_ASHMEM=y >> .config
+          echo CONFIG_ANDROID=y >> .config
+          echo CONFIG_ANDROID_BINDER_IPC=y >> .config
+          echo CONFIG_ANDROID_BINDER_DEVICES="binder,hwbinder,vndbinder" >> .config
 
       - name: Build linux kernel
         run: make
