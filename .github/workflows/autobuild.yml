@@ -27,6 +27,6 @@ jobs:
       - name: Build linux kernel
         run: make
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           path: arch/x86/boot/bzImage
