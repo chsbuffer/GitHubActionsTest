@@ -24,19 +24,14 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: Decode Keystore
-      run: |
-        mkdir -p ~/.android
-        echo "${{ secrets.SIGN_KEY }}" | base64 --decode > ~/.android/debug.keystore
-
-    - name: Verify Debug Keystore
-      run: keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android
-
     - name: Build Debug
       run: ./gradlew :myapplication:assembleDebug
 
-    - name: Verify Debug Keystore 2
-      run: keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android
+    - name: Sign APK
+      run: |
+        echo "${{ secrets.SIGN_KEY }}" | base64 --decode > debug.keystore
+        keytool -list -v -keystore debug.keystore -alias androiddebugkey -storepass android
+        apksigner sign --ks debug.keystore --ks-pass -pass:android --v3-signing-enabled false app/build/outputs/apk/debug/*.apk
 
     - name: Upload a Debug Artifact
       uses: actions/upload-artifact@v4
