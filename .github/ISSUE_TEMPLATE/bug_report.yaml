@@ -13,7 +13,6 @@ body:
     label: Environment
     description: |
       Example: LineageOS 21, Android 14, Magisk 29.0, LSPosed-v1.9.2-7024. Alternatively, upload the LSPosed log.
-    render: markdown
   validations:
     required: false
 - type: textarea
